@@ -4,17 +4,15 @@ import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
 import {  signOut } from "firebase/auth";
 import { auth } from '../utils/firebase'
-import { useNavigate } from 'react-router-dom'
 
 const ProfileDropdown = () => {
       
-    const navigate= useNavigate();
      const handleSignOut=()=>{
          signOut(auth).then(() => {
-        navigate('/')
+        // Sign-out successful.
     }).catch((error) => {
       // An error happened.
-      navigate("")
+      
     });
       }
   return (
