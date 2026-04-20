@@ -1,13 +1,19 @@
 import React from 'react'
+import Header from './Header'
+import MainContainer from './MainContainer'
+import SecondarContainer from './SecondarContainer'
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies'
 
 const Browse = () => { 
-  
-  useNowPlayingMovies()
+
+useNowPlayingMovies();
+
   return (
     <div>
       <Header/>
-    </div>
+      <MainContainer/>
+      <SecondarContainer/>
+    </div> 
   )
 }
 
