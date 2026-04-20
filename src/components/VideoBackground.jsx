@@ -10,14 +10,12 @@ const VideoBackground = ({ movieId }) => {
   //custom hook for fetching,filtering trailer video and dispatching into store
   useMovieTrailer(movieId)
   return (
-    <div>
+    <div className="">
       <iframe
-        width="560"
-        height="315"
-        src={`https://www.youtube.com/embed/${trailervideo?.key}?si=61jAyuSMpkXzj2DV`}
+        className="w-screen aspect-video pointer-events-none "
+        src={`https://www.youtube.com/embed/${trailervideo?.key}?autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&rel=0&loop=1&playlist=${trailervideo?.key}`}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
       
       ></iframe>
     </div>
