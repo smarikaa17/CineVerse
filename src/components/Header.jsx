@@ -51,8 +51,8 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full  absolute px-8 py-2 bg-gradient-to-b from-[#463b58] z-10 flex justify-between">
-      <img className="w-40" src={hero} alt="logo" />
+    <div className="w-full z-10  absolute px-8  bg-gradient-to-b from-black  flex justify-between">
+      <img className="w-40 " src={hero} alt="logo" />
       {user != null && (
         <div className="flex items-center">
           {search && (
@@ -76,7 +76,8 @@ const Header = () => {
               "Home Page"
             ) : (
               <>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />GPT Search
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                {" "}Search
               </>
             )}
           </button>
