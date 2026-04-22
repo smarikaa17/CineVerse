@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import {addNowPlayingMovie} from "./../store/movieSlice"
 import { useEffect } from "react";
 import {API_OPTIONS} from "./../utils/constant"
@@ -8,6 +8,8 @@ const useNowPlayingMovies=()=>{
    
    //store dispatch
  const dispatch= useDispatch()
+
+ const nowPlayingMovies= useSelector(state=>state.movie.movies)
 
  //first define the method that calls the api and store the data came from api to store slice
   const getNowPlayingMovies= async()=>{
@@ -20,8 +22,8 @@ const useNowPlayingMovies=()=>{
      dispatch(addNowPlayingMovie(res?.results)) 
   }
 useEffect(() => {
-  //called the api call method defined up above and it will be called for every render
-getNowPlayingMovies();
+  //used the memoization technique so that the api will only be called when the store doesnt hold data (to prevent unnecessary api call)
+ !nowPlayingMovies && getNowPlayingMovies();
 }, [])
 
 };

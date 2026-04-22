@@ -11,11 +11,9 @@ import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
 
-
 const Login = () => {
-
   //store
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   //local states
   const [isSignInForm, SetisSignInForm] = useState(true);
@@ -24,7 +22,7 @@ const Login = () => {
   //form fields
   const email = useRef(null);
   const password = useRef(null);
-  const name = useRef(null)
+  const name = useRef(null);
 
   //sign in/up action
   const handleButtonClick = () => {
@@ -40,25 +38,22 @@ const Login = () => {
         auth,
         email.current.value,
         password.current.value,
-        name.current.value
+        name.current.value,
       )
         .then((userCredential) => {
           const user = userCredential.user;
-      updateProfile(user, {
-           displayName: name.current.value
-        })
-        .then(() => {
-          // Profile updated!
-          const {uid,email,displayName}=auth.currentUser;
-          dispatch(addUser({uid, email,displayName}));
-       
-        })
-        .catch((error) => {
-          // An error occurred
-          SeterrorMsg(error.message)
-        });
-          
-         
+          updateProfile(user, {
+            displayName: name.current.value,
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName } = auth.currentUser;
+              dispatch(addUser({ uid, email, displayName }));
+            })
+            .catch((error) => {
+              // An error occurred
+              SeterrorMsg(error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -71,18 +66,15 @@ const Login = () => {
         auth,
         email.current.value,
         password.current.value,
-         
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          const {uid,email,displayName}=user;
-          
-          console.log("This is user obj" ,user.uid, user.email, user.displayName);
+          const { uid, email, displayName } = user;
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          SeterrorMsg(errorCode + "-"+ errorMessage);
+          SeterrorMsg(errorCode + "-" + errorMessage);
         });
     }
   };
@@ -106,7 +98,7 @@ const Login = () => {
         </h1>
         {!isSignInForm && (
           <input
-          ref={name}
+            ref={name}
             type="text"
             placeholder="Full Name"
             className="p-2 my-2 w-full bg-[#3b3b68]
