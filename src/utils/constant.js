@@ -6,7 +6,7 @@ export const API_OPTIONS = {
   headers: {
     accept: "application/json",
     Authorization:
-     ` Bearer${ import.meta.VITE_TMDB_KEY}`,
+     ` Bearer ${import.meta.env.VITE_TMDB_KEY}`,
 }
 };
 
