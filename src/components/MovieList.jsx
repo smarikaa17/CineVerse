@@ -2,7 +2,7 @@ import React from "react";
 import MovieCard from "./MovieCard";
 const MovieList = ({ title, Movies }) => {
   return (
-    <div className="px-6 relative">
+    <div className="px-6 relative ">
       <h1 className="text-2xl py-4 text-white">{title}</h1>
       <div className="flex hide-scrollbar overflow-x-scroll">
         <div className="flex pr-4 cursor-pointer">
