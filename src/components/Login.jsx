@@ -10,6 +10,9 @@ import { auth } from "../utils/firebase";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
+import { Eye, EyeOff } from "lucide-react";
+
+
 
 const Login = () => {
   //store
@@ -83,6 +86,17 @@ const Login = () => {
     SetisSignInForm((prev) => !prev);
   };
 
+  // const togglePasswordVisibility=()=>{
+  //   const passwordInput = password.current;
+  //   if (passwordInput.type === "password") {
+  //     passwordInput.type = "text";
+  //   } else {
+  //     passwordInput.type = "password";
+  //   }
+  // }
+
+  const[showPass,setShowPass]= useState(false)
+
   return (
     <div className="">
       <Header />
@@ -112,13 +126,20 @@ const Login = () => {
           className="p-2 my-2 w-full bg-[#3b3b68]
           focus:outline-none focus:shadow-[0_0_7px_rgba(124,58,237,0.8)]"
         />
+        <div className="flex items-center justify-between w-full p-2 my-2 bg-[#3b3b68] focus:shadow-[0_0_7px_rgba(124,58,237,0.8)]
+         ">
         <input
           ref={password}
-          type="password"
+          type={showPass?"text":"password"}
           placeholder="Password"
-          className="p-2 my-2 w-full bg-[#3b3b68]
-          focus:outline-none focus:shadow-[0_0_7px_rgba(124,58,237,0.8)]"
+          className=" w-full bg-[#3b3b68] focus:outline-none
+          "
         />
+        <button  onClick={()=>setShowPass(!showPass)}
+        className=" cursor-pointer  ">
+          {showPass===true? <EyeOff />:<Eye /> }
+        </button>
+        </div>
         <p className="text-red-500 font-semibold text-sm text-center">
           {errorMsg}
         </p>
