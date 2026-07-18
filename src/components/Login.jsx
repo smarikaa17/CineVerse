@@ -11,8 +11,7 @@ import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
 import { Eye, EyeOff } from "lucide-react";
-
-
+import PasswordSrengthChecker from "./PasswordSrengthChecker";
 
 const Login = () => {
   //store
@@ -86,26 +85,21 @@ const Login = () => {
     SetisSignInForm((prev) => !prev);
   };
 
-  // const togglePasswordVisibility=()=>{
-  //   const passwordInput = password.current;
-  //   if (passwordInput.type === "password") {
-  //     passwordInput.type = "text";
-  //   } else {
-  //     passwordInput.type = "password";
-  //   }
-  // }
 
   const[showPass,setShowPass]= useState(false)
+  const[pass,setPass]=useState("");
 
   return (
-    <div className="">
+    <div className="relative min-h-screen">
       <Header />
       <div className="absolute bg-gradient-to-b from-black ">
-        <img src={BG_URL} />
+        <img src={BG_URL}
+         />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute text-white p-12 bg-[#18181B] w-3/12 my-36 mx-auto right-0 left-0 bg-opacity-85"
+        className="absolute text-white p-12 bg-[#18181B] left-1/2 top-32 -translate-x-1/2 bg-opacity-85"
+        style={{width: isSignInForm?"25%":"30%" }}
       >
         <h1 className="font-bold text-3xl py-3 text-center">
           {isSignInForm ? "Sign In" : "Sign Up"}
@@ -126,31 +120,32 @@ const Login = () => {
           className="p-2 my-2 w-full bg-[#3b3b68]
           focus:outline-none focus:shadow-[0_0_7px_rgba(124,58,237,0.8)]"
         />
-        <div className="flex items-center justify-between w-full p-2 my-2 bg-[#3b3b68] focus:shadow-[0_0_7px_rgba(124,58,237,0.8)]
+        <div className="flex items-center justify-between w-full p-2 my-2 bg-[#3b3b68] focus-within:shadow-[0_0_7px_rgba(124,58,237,0.8)]
          ">
         <input
           ref={password}
           type={showPass?"text":"password"}
           placeholder="Password"
-          className=" w-full bg-[#3b3b68] focus:outline-none
-          "
+          className=" w-full bg-[#3b3b68] focus:outline-none "
+          value={pass}
+          onChange={(e)=>setPass(e.target.value)}
         />
         <button  onClick={()=>setShowPass(!showPass)}
         className=" cursor-pointer  ">
-          {showPass===true? <EyeOff />:<Eye /> }
+          {showPass===true? <EyeOff />:<Eye/> }
         </button>
         </div>
-        <p className="text-red-500 font-semibold text-sm text-center">
-          {errorMsg}
-        </p>
-
+        
+        {!isSignInForm &&(
+          <PasswordSrengthChecker pass={pass} />
+        )}
         <button
           className="p-3 my-6 bg-[#7C3AED] w-full hover:bg-[#A78BFA] rounded-lg "
           onClick={handleButtonClick}
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <p className="py-2">
+        <p className="py-1 text-center">
           {isSignInForm ? "New to Cineverse?" : "Already Registered?"}{" "}
           <span
             className="cursor-pointer text-[#7C3AED] font-semibold hover:text-[#A78BFA]"
