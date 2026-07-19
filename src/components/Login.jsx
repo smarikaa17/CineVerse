@@ -39,7 +39,7 @@ const Login = () => {
     );
     //validation erros are here
     SeterrorMsg(message);
-    toast.error(message);  //
+    if (message) toast.error(message);  //
     if (message) return;
     //else write signin and signup logic
 
