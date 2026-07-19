@@ -4,14 +4,17 @@ import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
 import {  signOut } from "firebase/auth";
 import { auth } from '../utils/firebase'
+import toast from 'react-hot-toast';
 
 const ProfileDropdown = () => {
       
      const handleSignOut=()=>{
          signOut(auth).then(() => {
         // Sign-out successful.
+        toast.success("Successfully signed out")
     }).catch((error) => {
       // An error happened. 
+      toast.error("an error occured")
            
     });
       }

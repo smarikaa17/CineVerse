@@ -8,8 +8,9 @@ export const checkValidData = (email, password, confirmPassword) => {
 
   // Only for Sign Up
   if (confirmPassword && password !== confirmPassword)
-    return "Passwords do not match";
+    return "Passwords does not match";
 
-  if (!isPswValid) return "Password does not meet the required rules";
+  if (confirmPassword && !isPswValid) return "Password does not meet the required rules";
+  if(!confirmPassword && !isPswValid) return " you entered an incorrect password"
   return null;
 };
