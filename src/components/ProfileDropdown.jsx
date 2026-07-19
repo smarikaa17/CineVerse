@@ -11,12 +11,12 @@ const ProfileDropdown = () => {
          signOut(auth).then(() => {
         // Sign-out successful.
     }).catch((error) => {
-      // An error happened.
-      
+      // An error happened. 
+           
     });
       }
   return (
-        <div className="absolute right-9 top-16 mt-3 w-56 bg-[#0B0B0F] border border-[#27272A] rounded-md shadow-lg opacity-80">
+        <div className="absolute right-9 top-16 mt-3 w-56 bg-[#0B0B0F] border border-[#27272A] rounded-md shadow-lg opacity-80 z-50">
               <div className="p-3 text-[#cdc2e0] hover:bg-[#27272A]  hover:text-[#A78BFA] cursor-pointer">
                 <FontAwesomeIcon icon={faPencil}/> Manage Profiles
               </div>

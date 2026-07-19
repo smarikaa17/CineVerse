@@ -51,7 +51,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full z-10 text-sm sm:text-base md:text-lg absolute px-8  bg-gradient-to-b from-black  flex justify-between flex-col md:flex-row sm:flex-row">
+    <div className="w-full z-50 text-sm sm:text-base md:text-lg absolute px-8  bg-gradient-to-b from-black  flex justify-between flex-col md:flex-row sm:flex-row">
       <img className="md:w-40 sm:w-40 w-32 mx-auto sm:mx-0 md:mx-0 " src={hero} alt="logo" />
       {user != null && (
         <div className="flex items-center">
