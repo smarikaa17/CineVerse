@@ -25,10 +25,14 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+  const confirmPassword= useRef(null);
 
+  
+
+  
   //sign in/up action
   const handleButtonClick = () => {
-    const message = checkValidData(email.current.value, password.current.value);
+    const message = checkValidData(email.current.value, password.current.value, !isSignInForm ? confirmPassword.current.value : null);
     SeterrorMsg(message);
 
     if (message) return;
@@ -40,7 +44,6 @@ const Login = () => {
         auth,
         email.current.value,
         password.current.value,
-        name.current.value,
       )
         .then((userCredential) => {
           const user = userCredential.user;
@@ -83,11 +86,21 @@ const Login = () => {
 
   const toggleSignInForm = () => {
     SetisSignInForm((prev) => !prev);
+
+    setPass("");
+    setConfirmPass("");
+    SeterrorMsg(null);
+
+    if(email.current) email.current.value = "";
+    if(password.current) password.current.value = "";
+    if(name.current) name.current.value = "";
+    if(confirmPassword.current) confirmPassword.current.value = "";
   };
 
-
+  const[showConfirmPass, setShowConfirmPass]= useState(false)
   const[showPass,setShowPass]= useState(false)
   const[pass,setPass]=useState("");
+  const[confirmPass,setConfirmPass]=useState("")
 
   return (
     <div className="relative min-h-screen">
@@ -135,10 +148,27 @@ const Login = () => {
           {showPass===true? <EyeOff />:<Eye/> }
         </button>
         </div>
-        
+        {!isSignInForm && ( 
+        <div className="flex items-center justify-between w-full p-2 my-4 bg-[#3b3b68] focus-within:shadow-[0_0_7px_rgba(124,58,237,0.8)]
+         ">
+          <input
+          ref={confirmPassword}
+          type={showConfirmPass?"text":"password"}
+          placeholder="confirm password"
+          className=" w-full bg-[#3b3b68] focus:outline-none "
+          value={confirmPass}
+          onChange={(e)=>setConfirmPass(e.target.value)}
+        />
+        <button  onClick={()=>setShowConfirmPass(!showConfirmPass)}
+        className=" cursor-pointer  ">
+          {showConfirmPass===true? <EyeOff />:<Eye/> }
+        </button>
+        </div>
+        )}
         {!isSignInForm &&(
           <PasswordSrengthChecker pass={pass} />
         )}
+        <p className="text-red-500 text-center">{errorMsg}</p>
         <button
           className="p-3 my-6 bg-[#7C3AED] w-full hover:bg-[#A78BFA] rounded-lg "
           onClick={handleButtonClick}
